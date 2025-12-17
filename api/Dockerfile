@@ -16,7 +16,7 @@ COPY app.py .
 COPY titanic_pipeline.py .
 
 # 3. Ensure models dir exists (will be mounted from host)
-COPY models /models
+COPY models app/models
 
 EXPOSE 8000
 
