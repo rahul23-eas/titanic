@@ -1,191 +1,140 @@
-import json
 import os
-from pathlib import Path
 from typing import Any, Dict
 
 import requests
 import streamlit as st
 
-# -----------------------------------------------------------------------------
-# MUST be the first Streamlit command
-# -----------------------------------------------------------------------------
-st.set_page_config(page_title="Housing Prediction", page_icon="🏠", layout="centered")
-
-# -----------------------------------------------------------------------------
-# Config
-# -----------------------------------------------------------------------------
-SCHEMA_PATH = Path("/app/data/data_schema.json")
-
-# API_URL is set in docker-compose environment
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
-PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
-
-# -----------------------------------------------------------------------------
-# Load schema from JSON file
-# -----------------------------------------------------------------------------
-@st.cache_resource
-def load_schema(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        raise FileNotFoundError(f"Schema file not found: {path}")
-    with open(path, "r") as f:
-        return json.load(f)
-
-
-schema = load_schema(SCHEMA_PATH)
-
-numerical_features = schema.get("numerical", {})
-categorical_features = schema.get("categorical", {})
-
-# -----------------------------------------------------------------------------
-# Streamlit UI
-# -----------------------------------------------------------------------------
-st.title("🏠 Housing Prediction App")
-st.write(
-    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction."
+# =============================================================================
+# Page config (MUST be first)
+# =============================================================================
+st.set_page_config(
+    page_title="Titanic Survival Prediction",
+    page_icon="",
+    layout="centered",
 )
 
-st.header("Input Features")
+# =============================================================================
+# Config
+# =============================================================================
+API_BASE_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
+PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
+
+# =============================================================================
+# Header
+# =============================================================================
+st.title(" Titanic Survival Prediction")
+st.markdown(
+    """
+Predict whether a passenger **survived the Titanic disaster** using a
+machine-learning model served via **FastAPI**.
+"""
+)
+
+st.info(f" Connected API: `{PREDICT_ENDPOINT}`")
+
+st.markdown("---")
+
+# =============================================================================
+# Input Section
+# =============================================================================
+st.header("留 Passenger Information")
 
 user_input: Dict[str, Any] = {}
 
-# -----------------------------------------------------------------------------
-# Numerical Features
-# -----------------------------------------------------------------------------
-st.subheader("Numerical Features")
+col1, col2 = st.columns(2)
 
-# Decide which features use sliders
-SLIDER_FEATURES = {"longitude", "latitude", "housing_median_age", "median_income"}
-
-for feature_name, stats in numerical_features.items():
-    min_val = float(stats.get("min", 0.0))
-    max_val = float(stats.get("max", 1000.0))
-    mean_val = float(stats.get("mean", (min_val + max_val) / 2))
-    median_val = float(stats.get("median", mean_val))
-
-    # Use median as default
-    default_val = median_val
-
-    label = feature_name.replace("_", " ").title()
-    help_text = (
-        f"Min: {min_val:.2f}, Max: {max_val:.2f}, "
-        f"Mean: {mean_val:.2f}, Median: {median_val:.2f}"
+with col1:
+    user_input["Pclass"] = st.selectbox(
+        "Passenger Class",
+        options=[1, 2, 3],
+        index=2,
+        help="1 = First class, 2 = Second class, 3 = Third class",
     )
 
-    if feature_name in SLIDER_FEATURES:
-        # Determine step size based on range and semantics
-        if feature_name in {"housing_median_age"}:
-            step = 1.0  # age in years, int-like
-        elif feature_name in {"median_income"}:
-            step = 0.1  # more granular
-        else:
-            # generic heuristic for latitude/longitude
-            step = 0.01
+    user_input["Age"] = st.slider(
+        "Age",
+        min_value=0,
+        max_value=80,
+        value=28,
+        step=1,
+    )
 
-        user_input[feature_name] = st.slider(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
-    else:
-        # Fallback to number_input for wide-range features
-        range_val = max_val - min_val
-        if range_val > 10000:
-            step = 10.0
-        elif range_val > 1000:
-            step = 5.0
-        elif range_val > 100:
-            step = 1.0
-        elif range_val > 10:
-            step = 0.1
-        else:
-            step = 0.01
+    user_input["SibSp"] = st.slider(
+        "Siblings / Spouses aboard",
+        min_value=0,
+        max_value=8,
+        value=0,
+    )
 
-        user_input[feature_name] = st.number_input(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
-# -----------------------------------------------------------------------------
-# Categorical Features
-# -----------------------------------------------------------------------------
-st.subheader("Categorical Features")
+with col2:
+    user_input["sex"] = st.selectbox(
+        "Sex",
+        options=["male", "female"],
+    )
 
-for feature_name, info in categorical_features.items():
-    unique_values = info.get("unique_values", [])
-    value_counts = info.get("value_counts", {})
+    user_input["Fare"] = st.number_input(
+        "Fare (£)",
+        min_value=0.0,
+        max_value=600.0,
+        value=32.0,
+        step=1.0,
+    )
 
-    if not unique_values:
-        continue
-
-    # Default to the most common value
-    if value_counts:
-        default_value = max(value_counts, key=value_counts.get)
-    else:
-        default_value = unique_values[0]
-
-    try:
-        default_idx = unique_values.index(default_value)
-    except ValueError:
-        default_idx = 0
-
-    label = feature_name.replace("_", " ").title()
-
-    user_input[feature_name] = st.selectbox(
-        label,
-        options=unique_values,
-        index=default_idx,
-        key=feature_name,
-        help=f"Distribution: {value_counts}",
+    user_input["Parch"] = st.slider(
+        "Parents / Children aboard",
+        min_value=0,
+        max_value=6,
+        value=0,
     )
 
 st.markdown("---")
 
-# -----------------------------------------------------------------------------
+# =============================================================================
 # Predict Button
-# -----------------------------------------------------------------------------
-if st.button("🔮 Predict", type="primary"):
+# =============================================================================
+if st.button(" Predict Survival", use_container_width=True):
     payload = {"instances": [user_input]}
 
-    with st.spinner("Calling API for prediction..."):
+    with st.spinner("Calling FastAPI for prediction..."):
         try:
-            resp = requests.post(PREDICT_ENDPOINT, json=payload, timeout=30)
+            response = requests.post(
+                PREDICT_ENDPOINT,
+                json=payload,
+                timeout=30,
+            )
         except requests.exceptions.RequestException as e:
-            st.error(f"❌ Request to API failed: {e}")
+            st.error(f"❌ Failed to connect to API:\n\n{e}")
         else:
-            if resp.status_code != 200:
-                st.error(f"❌ API error: HTTP {resp.status_code} - {resp.text}")
+            if response.status_code != 200:
+                st.error(
+                    f"❌ API Error (HTTP {response.status_code})\n\n{response.text}"
+                )
             else:
-                data = resp.json()
-                preds = data.get("predictions", [])
+                result = response.json()
+                predictions = result.get("predictions", [])
 
-                if not preds:
-                    st.warning("⚠️ No predictions returned from API.")
+                if not predictions:
+                    st.warning("⚠️ No prediction returned by the API.")
                 else:
-                    pred = preds[0]
-                    st.success("✅ Prediction successful!")
+                    prediction = predictions[0]
 
-                    st.subheader("Prediction Result")
+                    st.success("✅ Prediction successful")
 
-                    # Display prediction with nice formatting
-                    if isinstance(pred, (int, float)):
-                        st.metric(label="Predicted Value", value=f"{pred:,.2f}")
+                    st.markdown("###  Result")
+
+                    if prediction == 1:
+                        st.metric(
+                            label="Survival Outcome",
+                            value=" Survived",
+                        )
                     else:
-                        st.metric(label="Predicted Class", value=str(pred))
+                        st.metric(
+                            label="Survival Outcome",
+                            value=" Did NOT Survive",
+                        )
 
-                    # Show input summary in expander
-                    with st.expander("📋 View Input Summary"):
+                    with st.expander(" Submitted Passenger Data"):
                         st.json(user_input)
 
 st.markdown("---")
-st.caption(
-    f"📁 Schema: `{SCHEMA_PATH}`  \n"
-    f"🌐 API: `{API_BASE_URL}`"
-)
+st.caption("⚙️ Powered by FastAPI + Scikit-Learn | Titanic ML Classification")
