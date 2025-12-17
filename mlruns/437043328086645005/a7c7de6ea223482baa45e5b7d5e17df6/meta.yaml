@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/437043328086645005/a7c7de6ea223482baa45e5b7d5e17df6/artifacts
+end_time: 1765922181596
+entry_point_name: ''
+experiment_id: '437043328086645005'
+lifecycle_stage: active
+run_id: a7c7de6ea223482baa45e5b7d5e17df6
+run_name: lightgbm_optuna
+run_uuid: a7c7de6ea223482baa45e5b7d5e17df6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765922176482
+status: 3
+tags: []
+user_id: rahulmugada

@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/439e9b93d0114b2b99644ffcf2e2a3ce/artifacts
+end_time: 1765920410084
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: 439e9b93d0114b2b99644ffcf2e2a3ce
+run_name: ridge_with_pca
+run_uuid: 439e9b93d0114b2b99644ffcf2e2a3ce
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765920410022
+status: 3
+tags: []
+user_id: rahulmugada

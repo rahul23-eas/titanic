@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/049c9f4fb93549b6afe94e1696374453/artifacts
+end_time: 1765920403241
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: 049c9f4fb93549b6afe94e1696374453
+run_name: xgboost_baseline
+run_uuid: 049c9f4fb93549b6afe94e1696374453
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765920397281
+status: 3
+tags: []
+user_id: rahulmugada

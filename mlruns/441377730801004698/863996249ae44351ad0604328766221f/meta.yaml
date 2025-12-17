@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/863996249ae44351ad0604328766221f/artifacts
+end_time: 1765920387829
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: 863996249ae44351ad0604328766221f
+run_name: ridge_baseline
+run_uuid: 863996249ae44351ad0604328766221f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765920383320
+status: 3
+tags: []
+user_id: rahulmugada

@@ -1,0 +1,6 @@
+artifact_location: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/437043328086645005
+creation_time: 1765921329925
+experiment_id: '437043328086645005'
+last_update_time: 1765921329925
+lifecycle_stage: active
+name: titanic_classification_optuna

@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/f0611056efd349c887ac1db17f5208ed/artifacts
+end_time: 1765922108781
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: f0611056efd349c887ac1db17f5208ed
+run_name: xgboost_with_pca
+run_uuid: f0611056efd349c887ac1db17f5208ed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765922108688
+status: 3
+tags: []
+user_id: rahulmugada

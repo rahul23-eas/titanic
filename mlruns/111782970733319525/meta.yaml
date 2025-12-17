@@ -1,0 +1,6 @@
+artifact_location: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/111782970733319525
+creation_time: 1765913121935
+experiment_id: '111782970733319525'
+last_update_time: 1765913121935
+lifecycle_stage: active
+name: median_house_pricing_multi_model_optuna

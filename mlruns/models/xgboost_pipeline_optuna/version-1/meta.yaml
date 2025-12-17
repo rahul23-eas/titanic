@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1765913215680
+current_stage: None
+description: null
+last_updated_timestamp: 1765913215680
+name: xgboost_pipeline_optuna
+run_id: 1b82b1e3ee5a49b4b9ceaa09c3e162f2
+run_link: null
+source: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/111782970733319525/1b82b1e3ee5a49b4b9ceaa09c3e162f2/artifacts/housing_model
+status: READY
+status_message: null
+storage_location: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/111782970733319525/1b82b1e3ee5a49b4b9ceaa09c3e162f2/artifacts/housing_model
+user_id: null
+version: 1

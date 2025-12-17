@@ -1,0 +1,39 @@
+artifact_path: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/1/models/m-36bb6be52e584e229bc585974b641df2/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.8
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+is_signature_from_type_hint: false
+mlflow_version: 3.7.0
+model_id: m-36bb6be52e584e229bc585974b641df2
+model_size_bytes: 4273788
+model_uuid: m-36bb6be52e584e229bc585974b641df2
+prompts: null
+run_id: 4655ac81601449689733496d971bd555
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "longitude", "required": true}, {"type": "double",
+    "name": "latitude", "required": true}, {"type": "double", "name": "housing_median_age",
+    "required": true}, {"type": "long", "name": "total_rooms", "required": true},
+    {"type": "double", "name": "total_bedrooms", "required": false}, {"type": "long",
+    "name": "population", "required": true}, {"type": "long", "name": "households",
+    "required": true}, {"type": "double", "name": "median_income", "required": true},
+    {"type": "string", "name": "ocean_proximity", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-12-16 19:09:24.403757'

@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/437043328086645005/6ff9be0b28574e0291d97a6f18c8d414/artifacts
+end_time: 1765922159339
+entry_point_name: ''
+experiment_id: '437043328086645005'
+lifecycle_stage: active
+run_id: 6ff9be0b28574e0291d97a6f18c8d414
+run_name: ridge_optuna
+run_uuid: 6ff9be0b28574e0291d97a6f18c8d414
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765922154978
+status: 3
+tags: []
+user_id: rahulmugada

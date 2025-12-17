@@ -1,0 +1,46 @@
+{
+  "numerical": {
+    "Pclass": {
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 2.308641975308642,
+      "median": 3.0
+    },
+    "Age": {
+      "min": 0.42,
+      "max": 80.0,
+      "mean": 29.69911764705882,
+      "median": 28.0
+    },
+    "Fare": {
+      "min": 0.0,
+      "max": 512.3292,
+      "mean": 32.204207968574636,
+      "median": 14.4542
+    },
+    "SibSp": {
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 0.5230078563411896,
+      "median": 0.0
+    },
+    "Parch": {
+      "min": 0.0,
+      "max": 6.0,
+      "mean": 0.38159371492704824,
+      "median": 0.0
+    }
+  },
+  "categorical": {
+    "sex": {
+      "unique_values": [
+        "female",
+        "male"
+      ],
+      "value_counts": {
+        "male": 577,
+        "female": 314
+      }
+    }
+  }
+}

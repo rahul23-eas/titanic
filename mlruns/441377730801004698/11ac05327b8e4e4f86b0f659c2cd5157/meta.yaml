@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/11ac05327b8e4e4f86b0f659c2cd5157/artifacts
+end_time: 1765923976943
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: 11ac05327b8e4e4f86b0f659c2cd5157
+run_name: histgradientboosting_baseline
+run_uuid: 11ac05327b8e4e4f86b0f659c2cd5157
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765923970667
+status: 3
+tags: []
+user_id: rahulmugada

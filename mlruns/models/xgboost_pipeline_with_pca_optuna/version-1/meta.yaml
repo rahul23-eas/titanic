@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1765913299267
+current_stage: None
+description: null
+last_updated_timestamp: 1765913299267
+name: xgboost_pipeline_with_pca_optuna
+run_id: 912a310da69b43d4945e35241abdde56
+run_link: null
+source: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/111782970733319525/912a310da69b43d4945e35241abdde56/artifacts/housing_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/111782970733319525/912a310da69b43d4945e35241abdde56/artifacts/housing_model_with_pca
+user_id: null
+version: 1

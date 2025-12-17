@@ -1,0 +1,6 @@
+artifact_location: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698
+creation_time: 1765919489276
+experiment_id: '441377730801004698'
+last_update_time: 1765919489276
+lifecycle_stage: active
+name: titanic_survival_classification

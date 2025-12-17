@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/3343671ff64748ec94f26afd5418978a/artifacts
+end_time: 1765920413046
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: 3343671ff64748ec94f26afd5418978a
+run_name: lightgbm_with_pca
+run_uuid: 3343671ff64748ec94f26afd5418978a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765920412968
+status: 3
+tags: []
+user_id: rahulmugada

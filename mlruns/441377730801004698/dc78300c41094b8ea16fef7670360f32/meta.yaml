@@ -1,0 +1,15 @@
+artifact_uri: file:///R:/Downloads/housing_app_fall25-main/housing_app_fall25-main/mlruns/441377730801004698/dc78300c41094b8ea16fef7670360f32/artifacts
+end_time: 1765920410543
+entry_point_name: ''
+experiment_id: '441377730801004698'
+lifecycle_stage: active
+run_id: dc78300c41094b8ea16fef7670360f32
+run_name: histgradientboosting_with_pca
+run_uuid: dc78300c41094b8ea16fef7670360f32
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765920410471
+status: 3
+tags: []
+user_id: rahulmugada
