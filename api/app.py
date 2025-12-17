@@ -1,4 +1,3 @@
-# api/app.py
 """
 FastAPI service for Titanic survival prediction.
 Loads the trained classification pipeline and exposes a /predict endpoint.
@@ -13,10 +12,10 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 # -----------------------------------------------------------------------------
-# Configuration
+# Configuration (ABSOLUTE PATH — REQUIRED FOR DOCKER)
 # -----------------------------------------------------------------------------
-ROOT_DIR = Path(__file__).resolve().parents[1]
-MODEL_PATH =  Path("/app/models/global_best_model_optuna.pkl")
+MODEL_PATH = Path("/app/models/global_best_model_optuna.pkl")
+
 app = FastAPI(
     title="Titanic Survival Prediction API",
     description="FastAPI service for predicting passenger survival on the Titanic",
@@ -26,16 +25,20 @@ app = FastAPI(
 # -----------------------------------------------------------------------------
 # Load model at startup
 # -----------------------------------------------------------------------------
-def load_model(path: Path):
+def load_model(path):
+    path = Path(path)  # Defensive: ensures Path even if string passed
+
     if not path.exists():
         raise FileNotFoundError(f"Model file not found: {path}")
 
     print(f"Loading model from: {path}")
-    m = joblib.load(path)
-    print("✓ Model loaded successfully!")
-    if hasattr(m, "named_steps"):
-        print(f"Pipeline steps: {list(m.named_steps.keys())}")
-    return m
+    model = joblib.load(path)
+    print("✓ Model loaded successfully")
+
+    if hasattr(model, "named_steps"):
+        print(f"Pipeline steps: {list(model.named_steps.keys())}")
+
+    return model
 
 
 try:
@@ -48,40 +51,12 @@ except Exception as e:
 # Request / Response Schemas
 # -----------------------------------------------------------------------------
 class PredictRequest(BaseModel):
-    """
-    Batch prediction request.
-    Each instance must contain Titanic passenger features.
-    """
     instances: List[Dict[str, Any]]
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "instances": [
-                    {
-                        "Pclass": 3,
-                        "Age": 22,
-                        "Fare": 7.25,
-                        "SibSp": 1,
-                        "Parch": 0,
-                        "sex": "male",
-                    }
-                ]
-            }
-        }
 
 
 class PredictResponse(BaseModel):
     predictions: List[int]
     count: int
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "predictions": [0],
-                "count": 1,
-            }
-        }
 
 # -----------------------------------------------------------------------------
 # Routes
@@ -121,7 +96,7 @@ def predict(request: PredictRequest):
     except Exception as e:
         raise HTTPException(
             status_code=400,
-            detail=f"Invalid input format. Could not convert to DataFrame: {e}",
+            detail=f"Invalid input format: {e}",
         )
 
     required_columns = {
@@ -141,14 +116,14 @@ def predict(request: PredictRequest):
         )
 
     try:
-        preds = model.predict(X)
+        predictions = model.predict(X)
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Model prediction failed: {e}",
         )
 
-    preds_list = [int(p) for p in preds]
+    preds_list = [int(p) for p in predictions]
 
     return PredictResponse(
         predictions=preds_list,
@@ -163,5 +138,5 @@ async def startup_event():
     print("=" * 80)
     print(f"Model path: {MODEL_PATH}")
     print(f"Model loaded: {model is not None}")
-    print("API is ready to accept requests!")
+    print("API is ready to accept requests")
     print("=" * 80 + "\n")
