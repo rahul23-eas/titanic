@@ -16,7 +16,7 @@ from pydantic import BaseModel
 # Configuration
 # -----------------------------------------------------------------------------
 ROOT_DIR = Path(__file__).resolve().parents[1]
-MODEL_PATH = ROOT_DIR "app" / "models" / "global_best_model_optuna.pkl"
+MODEL_PATH = ROOT_DIR / "app" / "models" / "global_best_model_optuna.pkl"
 
 app = FastAPI(
     title="Titanic Survival Prediction API",
